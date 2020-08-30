@@ -1,0 +1,13 @@
+google_class_room.admin:
+  title: 'Google Class Room'
+  description: 'Google class room admin link '
+  parent: system.admin_config_development
+  route_name: google_class_room.content
+  weight: 100
+
+google_class_room.admin:
+  title: 'Google Class Room Config'
+  description: 'Google class room admin link '
+  parent: google_class_room.content
+  route_name: google_class_room.credsetting
+  weight: 100  

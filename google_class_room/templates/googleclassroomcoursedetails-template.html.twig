@@ -1,0 +1,164 @@
+{# [module]/templates/googleclassroomcoursedetails-template.html.twig #}
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <nav>
+  <div class="nav nav-tabs" id="nav-tab" role="tablist">
+    <a class="nav-item nav-link active" id="nav-home-tab" data-toggle="tab" href="#nav-home" role="tab" aria-controls="nav-home" aria-selected="true">Home</a>
+    <a class="nav-item nav-link" id="coursework-tab" data-toggle="tab" href="#coursework" role="tab" aria-controls="coursework" aria-selected="false">Course Work</a>
+    <a class="nav-item nav-link" id="nav-people-tab" data-toggle="tab" href="#nav-people" role="tab" aria-controls="nav-contact" aria-selected="false">People</a>
+  </div>
+</nav>
+<div class="tab-content" id="nav-tabContent">
+  <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
+    <div class="course-details-home my-5">
+         
+         <div class="nameandupdatesection">
+            <h3> {{class.name}} </h3>
+            <div>
+                <button 
+                type="button" 
+                class="btn btn-primary" 
+                data-toggle="modal" 
+                data-target="#exampleModalCenter">
+                <i class="fa fa-share-alt" aria-hidden="true"></i>
+                </button>
+                <a 
+                    href="/googleclassroom/updateclass?classid={{class.id}}" 
+                    class="use-ajax" 
+                    data-drupal-selector="edit-open-modal" 
+                    id="edit-open-modal">
+                    <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+                </a>
+            </div>
+         </div>
+        <p class="description"> {{class.description}} </p> <hr>
+         
+         <div class="nameandupdatesection">
+            <div>
+                Creaters Details
+            </div>
+            <div>
+                <img class="img-round" src="{{class.coursecreatordetail.usericon}}" height="50" width="50">
+                <span>{{class.coursecreatordetail.name}}</span> 
+            </div>
+         </div>   
+         <hr>
+        <h5>{{class.section}}</h5> <hr>
+       <div class="nameandupdatesection">
+        <h5> Topics </h5>
+        <a 
+            href="/googleclassroom/addtopics?classid={{class.id}}" 
+            class="use-ajax" 
+            data-drupal-selector="edit-open-modal" 
+            id="edit-open-modal">
+            <i class="fa fa-plus" aria-hidden="true"></i>
+        </a>
+       </div>
+       <hr>
+
+        {% if class.topics %}
+            <ul class="my-2">
+                {% for topic in class.topics %}
+                    <li class="nameandupdatesection my-2">
+                        <span>
+                            {{ topic.topicname }}  
+                        </span>
+                        <a 
+                            href="/googleclassroom/addtopics?classid={{class.id}}&topicid={{topic.topicid}}" 
+                            class="use-ajax " 
+                            data-drupal-selector="edit-open-modal" 
+                            id="edit-open-modal">
+                            <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+                        </a>
+
+                    </li>
+                {% endfor %}
+            </ul>
+        {% endif %}
+
+    </div>
+  </div>
+  <div class="tab-pane fade" id="coursework" role="tabpanel" aria-labelledby="coursework-tab">
+
+    <div class="row">
+        <div class="col-md-3">
+
+            <div class="">
+                <h5> Upcoming </h5>
+                
+            </div>
+
+        </div>
+        <div class="col-md-9">
+            {% if class.courseworks %}
+                <ul class="my-5">
+                    {% for coursework in class.courseworks %}
+                        <li class="my-2"> <h5>{{ coursework.topicname }}</h5> </li>
+                        <hr>
+                        {% if coursework.data %}
+                        <ul class="my-1">
+                            {% for workdata in  coursework.data %}
+                                <li class="my-2">{{workdata.getTitle}}</li>
+                            {% endfor %}    
+                        </ul>
+                        {% endif %}    
+                    {% endfor %}
+                </ul>
+            {% endif %}    
+        </div>
+    </div>
+  </div>
+  <div class="tab-pane fade" id="nav-people" role="tabpanel" aria-labelledby="nav-people-tab">
+    {# Show All People data #}
+
+    <div class="people-list-coursedetails my-5">
+
+    <h3> Teachers lists </h3>
+    <hr>
+    {% if class.teachers %}
+        <ul>
+            {% for teacher in class.teachers %}
+                <li class="my-2"> 
+                    <img class="img-round" src="{{teacher.profileurl}}" height="50" width="50"> 
+                    <span>{{ teacher.fullname }}</span> 
+                </li>
+            {% endfor %}
+        </ul>
+    {% endif %}
+    <h3> Students lists </h3>
+    <hr>
+    {% if class.students %}
+        <ul>
+            {% for student in class.students %}
+                <li class="my-2"> 
+                    <img class="img-round" src="{{student.profileurl}}" height="50" width="50"> 
+                    <span>{{ student.fullname }}</span> 
+                </li>
+            {% endfor %}
+        </ul>
+    {% endif %}
+    </div>
+
+  </div>
+</div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLongTitle">  student join code </h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <p class="my-2"> Google Class Room Link : {{class.alternateLink}} </p>
+        <p class="my-2"> Enrollemnet code :  {{class.enrollmentCode}}</p>
+        <p class="my-2"> Site Join Url : {{ url('google_class_room.join', {'joinid': class.enrollmentCode}) }} </p>
+      </div>
+    </div>
+  </div>
+</div>

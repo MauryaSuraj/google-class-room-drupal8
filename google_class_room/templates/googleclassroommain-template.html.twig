@@ -1,0 +1,11 @@
+{# [module]/templates/googleclassroommain-template.html.twig #}
+ 
+{% if classes %}
+    <ul>
+        {% for class in classes %}
+            <li><a href="{{class.courselink}}">{{ class.name }}</a></li>
+        {% endfor %}
+    </ul>
+{% endif %}
+
+<a href="/googleclassroom/modal_form" class="use-ajax btn btn-primary" data-drupal-selector="edit-open-modal" id="edit-open-modal">Add new class</a>

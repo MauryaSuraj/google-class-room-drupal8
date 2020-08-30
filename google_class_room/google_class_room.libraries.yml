@@ -1,0 +1,26 @@
+google_class_room:
+  remote: http://code.google.com/p/google-api-php-client
+  version: 2.4.1
+  license:
+    name: 'Apache License'
+    gpl-compatible: false
+  css:
+    theme:
+      css/googlecssclass.css: {}    
+  php:
+    libraries/google-api-php-client/vendor/autoload.php: {}
+  dependencies:
+    -
+google_class_room.add_client:
+  version: VERSION
+  js:
+    js/google_class_room.js: {}
+  dependencies:
+    - core/jquery
+
+custom_googleclassroomcss:
+  version: 1.0
+  css:
+    theme:
+      css/custom_googleclassroom.css: {} 
+

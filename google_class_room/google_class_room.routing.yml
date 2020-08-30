@@ -1,0 +1,85 @@
+google_class_room.content:
+  path: '/googleclassroom'
+  defaults:
+    _controller: '\Drupal\google_class_room\Controller\GoogleClassController::index'
+    _title: 'Google class room'
+  requirements:
+    _permission: 'access content'
+google_class_room.callbackurl:
+  path: '/googleclassroom/callbackurl'
+  defaults:  
+    _controller: '\Drupal\google_class_room\Controller\Callback::callbackUrl' 
+  requirements:
+    _permission: 'access content'
+google_class_room.credsetting:
+  path: '/googleclassroom/credsetting'
+  defaults:
+    _form: '\Drupal\google_class_room\Form\CredentailSetting'
+    _title: 'Google Api Settings'
+  requirements:
+    _permission: 'access content'
+
+google_class_room.open_modal_form:
+  path: '/googleclassroom/modal_form'
+  defaults:
+    _title: 'Modal Form'
+    _controller: '\Drupal\google_class_room\Controller\ModalFormController::openModalForm'
+  requirements:
+    _permission: 'access content'
+
+google_class_room.coursedetails:
+  path: '/googleclassroom/classdetails/{classid}'
+  defaults:
+    _controller: '\Drupal\google_class_room\Controller\ClassDetails::coursedetails'
+    _title: 'Class Details'
+  requirements:
+    _permission: 'access content'    
+
+google_class_room.updateclass:
+  path: '/googleclassroom/updateclass'
+  defaults:
+    _title: ''
+    _controller: '\Drupal\google_class_room\Controller\ModalFormController::openUpdateClassModalForm'
+  requirements:
+    _permission: 'access content'
+
+google_class_room.addtopics:
+  path: 'googleclassroom/addtopics'
+  defaults:
+    _title: ''
+    _controller: '\Drupal\google_class_room\Controller\ModalFormController::addtopicsForm'
+  requirements:
+    _permission: 'access content'  
+
+google_class_room.exampleform:
+  path: '/googleclassroom/exampleform'
+  defaults:
+    _form: '\Drupal\google_class_room\Form\ExampleForm'
+    _title: 'Google Api Settings'
+  requirements:
+    _permission: 'access content'
+
+google_class_room.invitations:
+  path: 'googleclassroom/invitations'
+  defaults:
+    _title: ''
+    _controller: '\Drupal\google_class_room\Controller\Invitations::index'
+  requirements:
+    _permission: 'access content'  
+
+google_class_room.join:
+  path: 'googleclassroom/join/{joinid}'
+  defaults:
+    _title: ''
+    _controller: '\Drupal\google_class_room\Controller\Joincourse::index'
+  requirements:
+    _permission: 'access content'  
+
+google_class_room.createcoursework:
+  path: 'googleclassroom/createcoursework/{courseid}'
+  defaults:
+    _title: ''
+    _form: '\Drupal\google_class_room\Form\CourseWorkForm'
+  requirements:
+    _permission: 'access content'  
+    
